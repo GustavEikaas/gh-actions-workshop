@@ -1,3 +1,5 @@
+# Task
+
 # Tasks
 
 ## Task 1
@@ -41,17 +43,30 @@ jobs:
 
 ## Task 2
 
+- Merge your the pull request from task 1
 - Make the action from task 1 mandatory as a branch protection rule
 
 <details>
     <summary>Hint</summary>
 To make the action mandatory you need to add a branch protection rule.
-You can do this by going to the settings of the repo and then to branches.
-Here you can add a rule that requires the action to pass before merging.
+1. Go to github settings in the web browser
+2. Navigate to rules and then rulesets
+3. Click new branch ruleset
+4. Give it a name (I usually call it main)
+5. Set enforcement status to active
+6. Click add target and select include default branch (main)
+7. Scroll down and check `Require status checks to pass`
+8. Click add checks
+9. Write the name of the job in your ci.yml workflow (Build)
+10. Click create
+
+Now you can make a pull request to check if its working
+The `merge` button on the pull request will be greyed out until the action completes
 </details>
 
 ## Task 3
 
+- Merge the pr from task 2
 - Add a badge from [shields](https://shields.io) to the readme.md
 
 <details>
@@ -59,24 +74,54 @@ Here you can add a rule that requires the action to pass before merging.
 
 To add a badge to the readme you need to add a markdown snippet.
 The snippet should look something like this:
+1. Remove the `\`
+2. Change github username to your username
+3. Change repo name to your repo name
+4. Add workflow name (ci.yml)
 \![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/<Github username>/<repo name>/<Workflow name>?label=Build)
+
+
+The badge will probably say build failed but that is because the badge is for the main branch where the action has failed
 </details>
 
 ## Task 4 
 
+- Merge PR from task 3
+- Make a new branch
 - Make the CI build action run on both Windows and Ubuntu runners before passing.
 
 <details>
     <summary>Hint</summary>
 
 To run the action on both Windows and Ubuntu you need to add a matrix to the action.
-The matrix should look something like this:
+The matrix configuration should look something like this:
 ```yaml
-strategy:
-  matrix:
-    os: [ubuntu-latest, windows-latest]
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    name: Build
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        shell: bash
+        run: |
+          npm install
+          npm run build
 ```
 You can then use the `matrix.os` variable to run different commands based on the OS.
+
+If everything is working you should see two CI / Build runs on your pull request
 </details>
 
 
@@ -169,4 +214,6 @@ You are a pro, no more hints for you.
     <summary>Hint</summary>
 Really dude?
 </details>
+
+
 
