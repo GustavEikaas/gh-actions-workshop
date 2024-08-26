@@ -122,7 +122,8 @@ jobs:
 You can then use the `matrix.os` variable to run different commands based on the OS.
 
 If everything is working you should see two CI / Build runs on your pull request
-> ![Note]
+
+> [!WARNING]  
 > Your branch protection rule is now invalid for some reason and will never succeed
 > To fix it update the branch protection rule and add `Build (ubuntu-latest)` and `Build (windows-latest)`
 
