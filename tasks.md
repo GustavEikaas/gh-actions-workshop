@@ -4,7 +4,7 @@
 
 ## Task 1
 
-- Clone template repo
+- Create repo from this template repo
 - Make a new branch
 - Make a github action that builds a pull request
 - Push the changes and create a pull request
@@ -78,7 +78,7 @@ The snippet should look something like this:
 2. Change github username to your username
 3. Change repo name to your repo name
 4. Add workflow name (ci.yml)
-\![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/<Github username>/<repo name>/<Workflow name>?label=Build)
+\![GitHub Workflow Status (with event)](https://img.shields.io/ github/actions/workflow/status/Github-username/repo-name/Workflow-name?label=Build)
 
 
 The badge will probably say build failed but that is because the badge is for the main branch where the action has failed
